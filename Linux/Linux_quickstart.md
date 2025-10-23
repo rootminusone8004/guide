@@ -73,8 +73,8 @@ From user's point of view, there isn't much difference in these tools. The RPM a
 ### DEB or .deb (Debian based softwares)
 DEB is the extension of the Debian software package format and the most often used name for such binary packages. DEB was developed by Debian.
 
-**Example**: Google chrome software<br>
-**Package name**: google-chrome-stable_current_amd64.deb<br>
+**Example**: Google chrome software  
+**Package name**: google-chrome-stable_current_amd64.deb  
 **Installation**:
 ``` bash
 dpkg -i google-chrome-stable_current_amd64.deb
@@ -83,8 +83,8 @@ dpkg -i google-chrome-stable_current_amd64.deb
 ### RPM or .rpm (Red Hat based softwares.)
 It is a package management system. The name RPM variously refers to the #.rpm# file format, files in this format, software packaged in such files, and the package manager itself. RPM was intended primarily for Linux distributions; the file format is the baseline package format of the Linux Standard Base. RPM was developed by Community & Red Hat.
 
-**Example**: Google chrome software<br>
-**Package name**: google-chrome-stable-57.0.2987.133-1.x86_64.rpm<br>
+**Example**: Google chrome software  
+**Package name**: google-chrome-stable-57.0.2987.133-1.x86_64.rpm  
 **Installation**:
 ``` bash
 rpm -ivh google-chrome-stable-57.0.2987.133-1.x86_64.rpm
@@ -94,14 +94,15 @@ _note_: You will also encounter diffrent commands, packages and service names wh
 ## Basic Commands
 - Open Terminal (Tmux in Terminator is always preferred!)
 - Know where you are? Present Working Directory
-``` bash
-pwd
-```
+  ``` bash
+  pwd
+  ```
+
 - List all the files in a directory
-``` bash
- $ ls # list everything in the current directory
- $ ls Documents # list everything in the Documents directory
-```
+  ``` bash
+   $ ls # list everything in the current directory
+   $ ls Documents # list everything in the Documents directory
+  ```
 | Options | Description                                                |
 |---------|------------------------------------------------------------|
 | -l      | Long listing format of files and directories, one per line |
@@ -116,25 +117,28 @@ pwd
 | -t      | Sorted by modified time, started with the newest file      |
 
 - Create a directory/folder in your home directory.
-``` bash
-mkdir my_fav_folder
-```
+  ``` bash
+  mkdir my_fav_folder
+  ```
+
 - Change your current working directory to linux-practices(Go to _Documents_ folder).
-``` bash
-cd Documents
-```
+  ``` bash
+  cd Documents
+  ```
+
 - Create some more directories and list them with "ls" command.
-``` bash
-$ mkdir vpdir
-$ mkdir testdir
-$ mkdir devopsdir
-$ ls
-```
+  ``` bash
+  $ mkdir vpdir
+  $ mkdir testdir
+  $ mkdir devopsdir
+  $ ls
+  ```
+
 - Create some empty files with "touch" command and list them.
-``` bash
-$ touch file1 file2 file3
-$ ls
-```
+  ``` bash
+  $ touch file1 file2 file3
+  $ ls
+  ```
 
 ## Absolute path and Relative path
 ### What is a path?
@@ -196,16 +200,16 @@ cat file2.py
 ### quick start
 
 - Install neovim editor
-> _Note_: Installation is for **Debian, Arch Linux and their derivatives**.
-``` bash
-$ sudo apt install neovim # for Debian and its derivatives
-$ sudo pacman -S neovim # for Arch Linux and its derivatives
-```
+  > _Note_: Installation is for **Debian, Arch Linux and their derivatives**.
+  ``` bash
+  $ sudo apt install neovim # for Debian and its derivatives
+  $ sudo pacman -S neovim # for Arch Linux and its derivatives
+  ```
 
 - Open up a file in neovim editor
-``` bash
-nvim sample.py
-```
+  ``` bash
+  nvim sample.py
+  ```
 
 - Hit i to enter into insert mode
 - type few lines
@@ -282,19 +286,19 @@ cat /etc/passwd
   grep root /etc/passwd
   ```
 
-> _note_: Linux is case sensetive, Root is diffrent that root. Ignoring case in grep with `-i` option.
-``` bash
-grep -i Root /etc/passwd
-```
+  > _note_: Linux is case sensetive, Root is diffrent that root. Ignoring case in grep with `-i` option.
+  ``` bash
+  grep -i Root /etc/passwd
+  ```
 
 - To display things except the given word use `-v` option.
 
 ## Filter Commands
 
 - **less**: Displays file content page wise or line wise.
-``` bash
-less /etc/passwd
-```
+  ``` bash
+  less /etc/passwd
+  ```
 
 | keybinding | Description                     |
 |------------|---------------------------------|
@@ -304,9 +308,9 @@ less /etc/passwd
 | v          | go to vi mode and edit the file |
 
 - **more**: It is exactly same line `less`
-``` bash
-more /etc/passwd
-```
+  ``` bash
+  more /etc/passwd
+  ```
 
 | keybinding | Description                     |
 |------------|---------------------------------|
@@ -316,19 +320,19 @@ more /etc/passwd
 | v          | go to vi mode and edit the file |
 
 - **head**: It is used to display the #top 10 lines# of the file.
-``` bash
-head /etc/passwd
-```
+  ``` bash
+  head /etc/passwd
+  ```
 
 - **tail**: It is used to display the #last 10 lines# of the file.
-``` bash
-tail /etc/passwd
-```
+  ``` bash
+  tail /etc/passwd
+  ```
 
 - **cut**:
-``` bash
-cut -d " " -f <file_name>
-```
+  ``` bash
+  cut -d " " -f <file_name>
+  ```
 
 Here,
 - `-d` stands for delimeter e.g. :, " " etc
@@ -338,11 +342,11 @@ The above command delimit all spces and print the field.
 
 - **sed**:
 
-sed stands for #stream editor# which is used to search a word in the file and replace it with the word required to be the output.
->  **note**: it will only modify the output but there will be no change in the original file
-``` bash
-sed 's/searchfor/replacewith/g' filename
-```
+  sed stands for **stream editor** which is used to search a word in the file and replace it with the word required to be the output.
+  >  **note**: it will only modify the output but there will be no change in the original file
+  ``` bash
+  sed 's/searchfor/replacewith/g' filename
+  ```
 
 ## I/O redirection
 
@@ -357,19 +361,19 @@ sed 's/tech/tools/g' devops.txt > newtools.txt
 > **note**: if the given name of the file is not available a new file will be created automatically. If the file already exists then it will #overwrite# contents of that file.
 
 - Appending another output in same file with `>>` .
-``` bash
-tail /etc/passwd >> newtools.txt
-```
+  ``` bash
+  tail /etc/passwd >> newtools.txt
+  ```
 
 - Redirecting only error to a file `2>>`.
-``` bash
-uptimer 2>> /tmp/error.log
-```
+  ``` bash
+  uptimer 2>> /tmp/error.log
+  ```
 
 - Redirecting all the output to a file `&>>`.
-``` bash
-uptimer &>> /tmp/error.log
-```
+  ``` bash
+  uptimer &>> /tmp/error.log
+  ```
 
 ## Piping
 
@@ -569,9 +573,9 @@ Four symbols are used when displaying permissions:
 
 ## Changing Permissions - Symbolic Method
 - To change access modes:
-``` bash
-chmod [-OPTION] ... mode[,mode] filel directory ...
-```
+  ``` bash
+  chmod [-OPTION] ... mode[,mode] filel directory ...
+  ```
 - mode includes:
   - `u`, `g` or `o` for user, group and other
   - `+`, `-` or `=` for grant, deny or set
@@ -864,7 +868,7 @@ Third line contains infrmation about **CPU usage**:
 - time spent for software interrupts
 - time stolen by hypervisiors
 
-Fourth line is about **memory usage**.<br>
+Fourth line is about **memory usage**.  
 Fifth line is about **swap usage**.
 - last portion indicates memory available for new process without swap
 
