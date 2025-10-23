@@ -274,7 +274,7 @@ _note_: When you open the neovim editor, it will be in the command mode by defau
 # Filter & IO redirection command
 ## Grep
 
-**grep** command is used to find texts from any text input.
+**grep** command is used to search for patterns within files.
 
 > _Passwd_ file: stores information about all the users in the system
 ``` bash
@@ -283,15 +283,62 @@ cat /etc/passwd
 
 - Finding line which contains word as "root" from _/etc/passwd_ file.
   ``` bash
-  grep root /etc/passwd
+  grep "root" /etc/passwd
   ```
 
-  > _note_: Linux is case sensetive, Root is diffrent that root. Ignoring case in grep with `-i` option.
+- Search for pattern using **basic** regular expressions (grep's default behavior):
+  > **NOTE**: Supports (^, $, ., [abc], [^abc], [a-z], *, \)  
   ``` bash
-  grep -i Root /etc/passwd
+  grep -G "^alias" ~/.bashrc
   ```
 
-- To display things except the given word use `-v` option.
+  > **NOTE**: grep uses `-G` by default so this option is redundant.
+
+- Interprets patterns as **extended** regular expressions:
+  > **NOTE**: Supports (?, +, {}, (), and |)  
+  ``` bash
+  grep -E "yt-dlp|lsp" .bashrc
+  ```
+
+- Interprets patterns as **fixed strings** rather regular expressions (**disables regex**):  
+  ``` bash
+  grep -F "fixed string" /etc/passwd
+  ```
+
+- Search for a pattern in all files **recursively** in a directory:
+  ``` bash
+  grep -r "xrandr" .cache
+  ```
+
+- **Ignore binary** files, search **recursively** in a directory, and print **file names** rather than the normal line output:
+  ``` bash
+  grep -Irl "neovim" .config
+  ```
+
+- An inverse search for the pattern (returns lines that **DO NOT contain** the pattern):
+  ``` bash
+  grep -v "^#" .bashrc
+  ```
+
+- Search for pattern, **ignoring** case and adding **line numbers** to the output:
+  ``` bash
+  grep -in "yt" .bashrc
+  ```
+
+- Recursively search and do not write anything to standard output (**quiet** mode):
+  ``` bash
+  grep -rq "wax$" .zshrc
+  ```
+
+- Recursively search and **suppress** error messages about non-existent or unreadable files:
+  ``` bash
+  grep -rs "lol" .zshrc
+  ```
+
+- Set a **max** number of matching lines:
+  ``` bash
+  grep -m 2 "bin" /opt/samp.txt
+  ```
 
 ## Filter Commands
 
@@ -340,12 +387,83 @@ Here,
 
 The above command delimit all spces and print the field.
 
-- **sed**:
+## sed
 
-  sed stands for **stream editor** which is used to search a word in the file and replace it with the word required to be the output.
-  >  **note**: it will only modify the output but there will be no change in the original file
+The **sed** command is a very powerful shell utility that is used to filter and transform text.
+
+- Replace first instance on each line of **old** with **new** using basic regex and print to stdout:
   ``` bash
-  sed 's/searchfor/replacewith/g' filename
+  command | sed 's/old/new/'
+  ```
+
+- Replace **old** with **new** on all lines using basic regex and print to stdout:
+  ``` bash
+  sed 's/old/new/g' .zshrc
+  ```
+
+- Replace **case-insensitive** **old** with **new** on all lines and print to stdout:
+  ``` bash
+  sed 's/old/new/gi' .zshrc
+  ```
+
+- Replace **old** with **OLD** on all lines using extended regex and print to stdout:
+  ``` bash
+  sed -E 's/(old)/\U\1/g' .bashrc
+  command | sed -E 's/(old)/\U\1/g'
+  ```
+
+  > **NOTE**: `\U` convert to uppercase; `\1` tells it to convert the first capture group of the sed command (which is **old**).
+
+- Replace **old** with **new** in-place in a file (writes to the file!):
+  ``` bash
+  sed -i 's/old/new/g' .zshrc
+  ```
+
+- Replace **old** with **new** and **first** with **second** in-place in a file (writes to the file!):
+  ``` bash
+  sed -i -e 's/old/new/g' -e 's/first/second/g' .bashrc
+  ```
+
+- Print the **first 10 lines** to stdout (similar to 'head'):
+  ``` bash
+  command | sed -n '10p'
+  ```
+
+  > NOTE The `-n` flag suppresses the printing of the entire output of the command.  Without the `-n`, it would print the 10 lines and then it would print the entire output from command.
+
+- Print only lines that contain the pattern (similar to 'grep'):
+  ``` bash
+  sed -n '/pattern/p' /etc/apt/sources.list
+  ```
+
+- **Delete pattern** and print to stdout:
+  ``` bash
+  sed '/pattern/d' .zshrc
+  ```
+
+- **Delete lines 1-4 of a file** and **create a back up** file with the .bak extension:
+  ``` bash
+  sed -i.bak '1,4d' .zshrc
+  ```
+
+- **Delete blank lines** (with or without spaces/tabs) from a file and print to stdout:
+  ``` bash
+  sed '/^[[:space:]]*$/d' .zshrc
+  ```
+
+- **Insert a new line** at the **beginning** of file, overwriting the file in-place:
+  ``` bash
+  sed -i '1i\A new first line\' .bashrc
+  ```
+
+- Inserting a line before a pattern and print to stdout.
+  ``` bash
+  sed '/pattern/i\This is a new line' .bashrc
+  ```
+
+- Append a line after a pattern and print to stdout.
+  ``` bash
+  sed '/pattern/a\This is a new line' .bashrc
   ```
 
 ## I/O redirection
